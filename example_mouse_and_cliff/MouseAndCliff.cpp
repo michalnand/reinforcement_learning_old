@@ -4,8 +4,10 @@
 MouseAndCliff::MouseAndCliff()
               :IEnvironment()
 {
-  width = 16;
-  height = 8;
+  srand(time(NULL));
+
+  width   = 16;
+  height  = 10;
 
   x = 0;
   y = 0;
@@ -54,14 +56,17 @@ MouseAndCliff::~MouseAndCliff()
 
 MouseAndCliff& MouseAndCliff::operator= (MouseAndCliff& other)
 {
-  // IEnvironment::operator=other;
+  // this->IEnvironment::operator=other;
+  state         = other.state;
+  actions_count = other.actions_count;
+  reward        = other.reward;
 
   x = other.x;
   y = other.y;
   rewards = other.rewards;
 
-  steps_now = other.steps_now;
-  steps_prev = other.steps_prev;
+  steps_now   = other.steps_now;
+  steps_prev  = other.steps_prev;
   path_length = other.path_length;
 
   return *this;
@@ -133,7 +138,7 @@ void MouseAndCliff::print()
       if ((j == y)&&(i == x))
         std::cout << "M";
       else if (rewards[j][i] < 0.0)
-        std::cout << "!";
+        std::cout << "*";
       else if (rewards[j][i] > 0.0)
         std::cout << "T";
       else

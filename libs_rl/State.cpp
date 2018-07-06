@@ -42,7 +42,7 @@ State& State::operator =(State &rhs)
 }
 
 
-State::operator std::vector<float> ()
+State::operator std::vector<float>& ()
 {
   return m_state;
 }
@@ -104,7 +104,7 @@ void State::print()
 void State::set(float value, unsigned int x, unsigned int y, unsigned int z)
 {
   unsigned int idx = (z*m_h + y)*m_w + x;
-  
+
   m_state[idx] = value;
 }
 

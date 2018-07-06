@@ -18,7 +18,7 @@ class State
     virtual ~State();
 
     State& operator =(State &rhs);
-    operator std::vector<float>();
+    operator std::vector<float>&();
 
     void init(unsigned int width, unsigned int height = 1, unsigned int depth = 1);
 

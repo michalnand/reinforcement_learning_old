@@ -2,17 +2,24 @@
 #define _I_AGENT_H_
 
 #include <State.h>
+#include <IEnvironment.h>
 
 class IAgent
 {
   protected:
-    State state;
+    IEnvironment *env;
 
+  public:
+      IAgent(IEnvironment &env_);
+      IAgent(const IAgent& other);
 
-    void process(IEnvironment &environment);
+      virtual ~IAgent();
+      IAgent& operator= (const IAgent& other);
 
-  protected:
-    
+      unsigned long int id();
+
+    public:
+      virtual void process();
 };
 
 #endif
