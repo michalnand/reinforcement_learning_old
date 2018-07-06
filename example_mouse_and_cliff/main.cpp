@@ -65,6 +65,7 @@ int main()
     action_prev = action;
     action = select_action(q, state);
 
+    //SARSA
     q[state_prev][action_prev]+= alpha*(env.get_reward() + gamma*q[state][action] - q[state_prev][action_prev]);
 
     env.execute_action(action);
