@@ -14,8 +14,11 @@ class IEnvironment
   public:
     IEnvironment();
     IEnvironment(IEnvironment& other);
+    IEnvironment(const IEnvironment& other);
+
     virtual ~IEnvironment();
     IEnvironment& operator= (IEnvironment& other);
+    IEnvironment& operator= (const IEnvironment& other);
 
   public:
     State& get_state()

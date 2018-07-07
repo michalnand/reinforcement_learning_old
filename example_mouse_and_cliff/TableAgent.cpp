@@ -24,6 +24,20 @@ TableAgent::TableAgent(IEnvironment &env_)
   e     = 0.1;
 }
 
+TableAgent::TableAgent(TableAgent& other)
+           :IAgent(other)
+{
+  q           = other.q;
+  state       = other.state;
+  state_prev  = other.state_prev;
+  action      = other.action;
+  action_prev = other.action_prev;
+
+  alpha = 0.1;
+  gamma = 0.8;
+  e     = 0.1;
+}
+
 TableAgent::TableAgent(const TableAgent& other)
            :IAgent(other)
 {
@@ -41,6 +55,23 @@ TableAgent::TableAgent(const TableAgent& other)
 TableAgent::~TableAgent()
 {
 
+}
+
+TableAgent& TableAgent::operator= (TableAgent& other)
+{
+  env         = other.env;
+
+  q           = other.q;
+  state       = other.state;
+  state_prev  = other.state_prev;
+  action      = other.action;
+  action_prev = other.action_prev;
+
+  alpha       = other.alpha;
+  gamma       = other.gamma;
+  e           = other.e;
+
+  return *this;
 }
 
 TableAgent& TableAgent::operator= (const TableAgent& other)

@@ -10,16 +10,18 @@ class IAgent
     IEnvironment *env;
 
   public:
-      IAgent(IEnvironment &env_);
-      IAgent(const IAgent& other);
+    IAgent(IEnvironment &env_);
+    IAgent(IAgent& other);
+    IAgent(const IAgent& other);
 
-      virtual ~IAgent();
-      IAgent& operator= (const IAgent& other);
+    virtual ~IAgent();
+    IAgent& operator= (IAgent& other);
+    IAgent& operator= (const IAgent& other);
 
-      unsigned long int id();
+    unsigned long int id();
 
-    public:
-      virtual void process();
+  public:
+    virtual void process();
 };
 
 #endif

@@ -5,6 +5,7 @@
 int main()
 {
     MouseAndCliff env;
+
     TableAgent agent_learn(env);
 
     for (unsigned int i = 0; i < 100000; i++)
@@ -20,6 +21,6 @@ int main()
       agent_learn.process();
     }
 
-  std::cout << "program done\n";
-  return 0;
+    std::cout << "program done\n";
+    return 0;
 }

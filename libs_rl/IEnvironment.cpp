@@ -15,12 +15,28 @@ IEnvironment::IEnvironment(IEnvironment& other)
   reward        = other.reward;
 }
 
+IEnvironment::IEnvironment(const IEnvironment& other)
+{
+  state         = other.state;
+  actions_count = other.actions_count;
+  reward        = other.reward;
+}
+
 IEnvironment::~IEnvironment()
 {
 
 }
 
 IEnvironment& IEnvironment::operator= (IEnvironment& other)
+{
+  state         = other.state;
+  actions_count = other.actions_count;
+  reward        = other.reward;
+
+  return *this;
+}
+
+IEnvironment& IEnvironment::operator= (const IEnvironment& other)
 {
   state         = other.state;
   actions_count = other.actions_count;

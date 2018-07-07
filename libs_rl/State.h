@@ -14,10 +14,13 @@ class State
     State();
     State(unsigned int width, unsigned int height = 1, unsigned int depth = 1);
     State(State &rhs);
+    State(const State &rhs);
 
     virtual ~State();
 
     State& operator =(State &rhs);
+    State& operator =(const State &rhs);
+
     operator std::vector<float>&();
 
     void init(unsigned int width, unsigned int height = 1, unsigned int depth = 1);

@@ -20,13 +20,28 @@ State::State(unsigned int width, unsigned int height, unsigned int depth)
 
 State::State(State &rhs)
 {
-  m_w = 0;
-  m_h = 0;
-  m_d = 0;
+  m_w = rhs.m_w;
+  m_h = rhs.m_h;
+  m_d = rhs.m_d;
 
-  init(rhs.w(), rhs.h(), rhs.d());
-  from_vector(rhs.m_state);
+  m_state.resize(m_w*m_h*m_d);
+
+  for (unsigned int i = 0; i < m_state.size(); i++)
+    m_state[i] = rhs.m_state[i];
 }
+
+State::State(const State &rhs)
+{
+  m_w = rhs.m_w;
+  m_h = rhs.m_h;
+  m_d = rhs.m_d;
+
+  m_state.resize(m_w*m_h*m_d);
+
+  for (unsigned int i = 0; i < m_state.size(); i++)
+    m_state[i] = rhs.m_state[i];
+}
+
 
 State::~State()
 {
@@ -35,12 +50,31 @@ State::~State()
 
 State& State::operator =(State &rhs)
 {
-  init(rhs.w(), rhs.h(), rhs.d());
-  from_vector(rhs.m_state);
+  m_w = rhs.m_w;
+  m_h = rhs.m_h;
+  m_d = rhs.m_d;
+
+  m_state.resize(m_w*m_h*m_d);
+
+  for (unsigned int i = 0; i < m_state.size(); i++)
+    m_state[i] = rhs.m_state[i];
 
   return *this;
 }
 
+State& State::operator =(const State &rhs)
+{
+  m_w = rhs.m_w;
+  m_h = rhs.m_h;
+  m_d = rhs.m_d;
+
+  m_state.resize(m_w*m_h*m_d);
+
+  for (unsigned int i = 0; i < m_state.size(); i++)
+    m_state[i] = rhs.m_state[i];
+
+  return *this;
+}
 
 State::operator std::vector<float>& ()
 {

@@ -6,6 +6,11 @@ IAgent::IAgent(IEnvironment &env_)
   this->env = &env_;
 }
 
+IAgent::IAgent(IAgent& other)
+{
+  env = other.env;
+}
+
 IAgent::IAgent(const IAgent &other)
 {
   env = other.env;
@@ -14,6 +19,13 @@ IAgent::IAgent(const IAgent &other)
 IAgent::~IAgent()
 {
 
+}
+
+IAgent& IAgent::operator= (IAgent& other)
+{
+  env = other.env;
+
+  return *this;
 }
 
 IAgent& IAgent::operator= (const IAgent& other)

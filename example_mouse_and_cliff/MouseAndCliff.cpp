@@ -49,6 +49,18 @@ MouseAndCliff::MouseAndCliff(MouseAndCliff& other)
   path_length = other.path_length;
 }
 
+MouseAndCliff::MouseAndCliff(const MouseAndCliff& other)
+              :IEnvironment(other)
+{
+  rewards = other.rewards;
+  x = other.x;
+  y = other.y;
+
+  steps_now = other.steps_now;
+  steps_prev = other.steps_prev;
+  path_length = other.path_length;
+}
+
 MouseAndCliff::~MouseAndCliff()
 {
 
@@ -57,6 +69,23 @@ MouseAndCliff::~MouseAndCliff()
 MouseAndCliff& MouseAndCliff::operator= (MouseAndCliff& other)
 {
   // this->IEnvironment::operator=other;
+  state         = other.state;
+  actions_count = other.actions_count;
+  reward        = other.reward;
+
+  x = other.x;
+  y = other.y;
+  rewards = other.rewards;
+
+  steps_now   = other.steps_now;
+  steps_prev  = other.steps_prev;
+  path_length = other.path_length;
+
+  return *this;
+}
+
+MouseAndCliff& MouseAndCliff::operator= (const MouseAndCliff& other)
+{
   state         = other.state;
   actions_count = other.actions_count;
   reward        = other.reward;

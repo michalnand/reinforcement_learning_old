@@ -20,8 +20,11 @@ class MouseAndCliff: public IEnvironment
 
     MouseAndCliff();
     MouseAndCliff(MouseAndCliff& other);
+    MouseAndCliff(const MouseAndCliff& other);
+
     virtual ~MouseAndCliff();
     MouseAndCliff& operator= (MouseAndCliff& other);
+    MouseAndCliff& operator= (const MouseAndCliff& other);
 
   public:
     void execute_action(unsigned int action_id);

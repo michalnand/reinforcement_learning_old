@@ -15,9 +15,11 @@ class TableAgent: public IAgent
 
   public:
     TableAgent(IEnvironment &env_);
+    TableAgent(TableAgent& other);
     TableAgent(const TableAgent& other);
 
     virtual ~TableAgent();
+    TableAgent& operator= (TableAgent& other);
     TableAgent& operator= (const TableAgent& other);
 
   public:
