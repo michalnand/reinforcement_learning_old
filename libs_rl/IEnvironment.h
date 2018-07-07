@@ -41,6 +41,11 @@ class IEnvironment
       return score;
     }
 
+    void reset_score()
+    {
+      score = 0.0;
+    }
+
   public:
     unsigned int w()
     {
