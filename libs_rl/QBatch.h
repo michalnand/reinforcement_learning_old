@@ -29,6 +29,8 @@ class QBatch
 
     void clean();
 
+    unsigned int size();
+
     void compute(float gamma);
 
     QBatchItem& get(unsigned int idx);

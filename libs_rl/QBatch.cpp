@@ -51,9 +51,9 @@ void QBatch::compute(float gamma)
   unsigned int last = current_ptr;
   batch[last].q = batch[last].reward;
 
-  for (int i = last; i > 0; i--)
-    batch[i-1].q = batch[i-1].reward + gamma*batch[i].q;
-}
+  for (int i = (last-1); i >= 0; i--)
+    batch[i].q = batch[i].reward + gamma*batch[i+1].q;
+} 
 
 bool QBatch::add(State &state, unsigned int action, float reward)
 {
@@ -84,6 +84,10 @@ void QBatch::clean()
   current_ptr = 0;
 }
 
+unsigned int QBatch::size()
+{
+  return current_ptr;
+}
 
 QBatchItem& QBatch::get(unsigned int idx)
 {

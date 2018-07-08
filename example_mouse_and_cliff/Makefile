@@ -1,12 +1,17 @@
 ELF = bin/example_mouse_and_cliff.elf
 
 LIBS_RL=../libs_rl
+LIBS_NN=$(HOME)/programming/nn_lib
 
 INC+= -I.
 INC+= -I$(LIBS_RL)
+INC+= -I$(LIBS_NN)/libs_nn
+INC+= -I$(LIBS_NN)/libs_common
 
 
 LIBS+= $(LIBS_RL)/libs_rl.a
+LIBS+= $(LIBS_NN)/libs_nn/libs_nn.a
+LIBS+= $(LIBS_NN)/libs_common/libs_common.a
 
 CC = g++
 CU = nvcc
