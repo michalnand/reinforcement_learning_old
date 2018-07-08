@@ -1,12 +1,13 @@
 #include "NNAgent.h"
 
-
+#define NNAgentDefaultGamma   ((float)0.9)
+#define NNAgentDefaultE       ((float)0.1)
 
 NNAgent::NNAgent(IEnvironment &env_)
            :IAgent(env_)
 {
-  gamma = 0.9;
-  e     = 0.1;
+  gamma = NNAgentDefaultGamma;
+  e     = NNAgentDefaultE;
 
   std::string nn_config = "nn_parameters.json";
   sGeometry input_geometry;
@@ -20,10 +21,10 @@ NNAgent::NNAgent(IEnvironment &env_)
   output_geometry.h = 1;
   output_geometry.d = env->get_actions_count();
 
-  nn = new CNN(nn_config, input_geometry, output_geometry);
+//  nn = new CNN(nn_config, input_geometry, output_geometry);
 
 
-  q_batch.resize(1000);
+  q_batch.resize(10000);
 
   q_values.resize(env->get_actions_count());
 
@@ -40,24 +41,26 @@ NNAgent::NNAgent(IEnvironment &env_)
 NNAgent::NNAgent(NNAgent& other)
            :IAgent(other)
 {
-  gamma = 0.8;
-  e     = 0.1;
+  gamma = NNAgentDefaultGamma;
+  e     = NNAgentDefaultE;
 }
 
 NNAgent::NNAgent(const NNAgent& other)
            :IAgent(other)
 {
-  gamma = 0.8;
-  e     = 0.1;
+  gamma = NNAgentDefaultGamma;
+  e     = NNAgentDefaultE;
 }
 
 NNAgent::~NNAgent()
 {
+  /*
   if (nn != nullptr)
   {
     delete nn;
     nn = nullptr;
   }
+  */
 }
 
 NNAgent& NNAgent::operator= (NNAgent& other)
@@ -82,13 +85,14 @@ void NNAgent::process(bool learn)
 {
   State state = env->get_state();
 
+/*
   nn->forward_vector(q_values, state);
   unsigned int action = select_action(q_values, e);
+*/
 
-/*
   unsigned int state_idx = argmax(state);
   unsigned int action = select_action(q[state_idx], e);
-*/
+
 
   env->execute_action(action);
 
@@ -104,14 +108,12 @@ void NNAgent::process(bool learn)
       {
         QBatchItem item = q_batch.get_random();
 
-/*
         unsigned int state_idx = argmax(item.get_state_vector());
-        unsigned int action_idx = item.get_action();
 
-        q[state_idx][action_idx]+= 0.01*(item.get_q() - q[state_idx][action_idx]);
-*/
+        q[state_idx][item.get_action()]+= 0.01*(item.get_q() - q[state_idx][item.get_action()]);
 
-        nn->learn_single_output_vector(item.get_q(), item.get_state_vector(), item.get_action());
+
+    //    nn->learn_single_output_vector(item.get_q(), item.get_state_vector(), item.get_action());
       }
 
       q_batch.clean();

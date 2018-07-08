@@ -10,9 +10,10 @@ int main()
     MouseAndCliff env;
 
     NNAgent agent(env);
+    //TableAgent agent(env);
     agent.set_e(0.2);
 
-    unsigned int training_iterations = 500000;
+    unsigned int training_iterations = 100000;
     for (unsigned int i = 0; i < training_iterations; i++)
     {
       agent.process();
@@ -27,7 +28,7 @@ int main()
       env.print();
       agent.process();
     }
-    
+
     std::cout << "program done\n";
     return 0;
 }
